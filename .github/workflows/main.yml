@@ -7,8 +7,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Test
-        run: echo ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set secret to environment variable
+        run: echo "SECRET_VALUE=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Print secret value
+        run: echo $SECRET_VALUE
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
